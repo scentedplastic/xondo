@@ -1,0 +1,659 @@
+/**
+ * Foundation for Sites
+ * Version 6.8.1
+ * https://get.foundation
+ * Licensed under MIT Open Source
+ */
+
+// --- Dependencies ---
+@import 'vendor/normalize';
+@import '../_vendor/sassy-lists/stylesheets/helpers/missing-dependencies';
+@import '../_vendor/sassy-lists/stylesheets/helpers/true';
+@import '../_vendor/sassy-lists/stylesheets/functions/contain';
+@import '../_vendor/sassy-lists/stylesheets/functions/purge';
+@import '../_vendor/sassy-lists/stylesheets/functions/remove';
+@import '../_vendor/sassy-lists/stylesheets/functions/replace';
+@import '../_vendor/sassy-lists/stylesheets/functions/to-list';
+
+// --- Settings ---
+// import your own `settings` here or
+// import and modify the default settings through
+// @import 'settings/settings';
+
+// --- Custom Fonts ---
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0');
+
+
+// --- Components ---
+// Utilities
+@import 'util/util';
+// Global styles
+@import 'global';
+@import 'forms/forms';
+@import 'typography/typography';
+
+// Grids
+@import 'grid/grid';
+@import 'xy-grid/xy-grid';
+// Generic components
+@import 'components/button';
+@import 'components/button-group';
+@import 'components/close-button';
+@import 'components/label';
+@import 'components/progress-bar';
+@import 'components/slider';
+@import 'components/switch';
+@import 'components/table';
+// Basic components
+@import 'components/badge';
+@import 'components/breadcrumbs';
+@import 'components/callout';
+@import 'components/card';
+@import 'components/dropdown';
+@import 'components/pagination';
+@import 'components/tooltip';
+
+// Containers
+@import 'components/accordion';
+@import 'components/media-object';
+@import 'components/orbit';
+@import 'components/responsive-embed';
+@import 'components/tabs';
+@import 'components/thumbnail';
+// Menu-based containers
+@import 'components/menu';
+@import 'components/menu-icon';
+@import 'components/accordion-menu';
+@import 'components/drilldown';
+@import 'components/dropdown-menu';
+
+// Layout components
+@import 'components/off-canvas';
+@import 'components/reveal';
+@import 'components/sticky';
+@import 'components/title-bar';
+@import 'components/top-bar';
+
+// Helpers
+@import 'components/float';
+@import 'components/flex';
+@import 'components/visibility';
+@import 'prototype/prototype';
+
+
+@mixin foundation-everything(
+  $flex: true,
+  $prototype: false,
+  $xy-grid: $xy-grid
+) {
+  @if $flex {
+    $global-flexbox: true !global;
+  }
+
+  @if $xy-grid {
+    $xy-grid: true !global;
+  }
+
+  // Global styles
+  @include foundation-global-styles;
+  @include foundation-forms;
+  @include foundation-typography;
+
+  // Grids
+  @if not $flex {
+    @include foundation-grid;
+  }
+  @else {
+    @if $xy-grid {
+      @include foundation-xy-grid-classes;
+    }
+    @else {
+      @include foundation-flex-grid;
+    }
+  }
+
+  // Generic components
+  @include foundation-button;
+  @include foundation-button-group;
+  @include foundation-close-button;
+  @include foundation-label;
+  @include foundation-progress-bar;
+  @include foundation-slider;
+  @include foundation-switch;
+  @include foundation-table;
+  // Basic components
+  @include foundation-badge;
+  @include foundation-breadcrumbs;
+  @include foundation-callout;
+  @include foundation-card;
+  @include foundation-dropdown;
+  @include foundation-pagination;
+  @include foundation-tooltip;
+
+  // Containers
+  @include foundation-accordion;
+  @include foundation-media-object;
+  @include foundation-orbit;
+  @include foundation-responsive-embed;
+  @include foundation-tabs;
+  @include foundation-thumbnail;
+  // Menu-based containers
+  @include foundation-menu;
+  @include foundation-menu-icon;
+  @include foundation-accordion-menu;
+  @include foundation-drilldown-menu;
+  @include foundation-dropdown-menu;
+
+  // Layout components
+  @include foundation-off-canvas;
+  @include foundation-reveal;
+  @include foundation-sticky;
+  @include foundation-title-bar;
+  @include foundation-top-bar;
+
+  // Helpers
+  @include foundation-float-classes;
+  @if $flex { @include foundation-flex-classes; }
+  @include foundation-visibility-classes;
+  @if $prototype { @include foundation-prototype-classes; }
+}
+
+
+
+/**
+ * *Base styles*
+ */
+.button {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lang-nl {
+  display: none;
+}
+
+
+/**
+ * *Powered by*
+ */
+
+.powered-by {
+  background-color: $light-gray;
+  text-align: center;
+
+  img {
+    width: 50px;
+    margin-left: 5px;
+  }
+}
+
+
+/**
+ * *Responsive Top Bar*
+ */
+
+$topbar-responsive-bg: $secondary-color;
+$topbar-responsive-animation-type: fade-in; // or use slide-down or none
+
+.topbar-responsive {
+  background: $topbar-responsive-bg;
+  padding: 1rem 1.5rem;
+
+  .topbar-responsive-logo {
+    color: $white;
+    vertical-align: middle;
+
+    img {
+      width: 100px;
+    }
+  }
+
+  .menu {
+    background: $topbar-responsive-bg;
+
+    li,
+    .topbar-responsive-button,
+    .switch span {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
+    li:last-of-type {
+      margin-right: 0;
+    }
+
+    a {
+      color: $white;
+      transition: color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @include breakpoint(medium down) {
+        padding: 0.875rem 0;
+      }
+    }
+
+    .switch {
+      margin-bottom: 0;
+    }
+
+    .topbar-responsive-button {
+      color: $white;
+      transition: color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @include breakpoint(medium down) {
+        width: 100%;
+        margin: 0.875rem 0;
+      }
+    }
+  }
+
+  @include breakpoint(large down) {
+     padding: 0.75rem;
+
+    .top-bar-title {
+      position: relative;
+      // width: 100%;
+
+      span {
+        position: absolute;
+        right: 0;
+        border: 1px solid $white;
+        border-radius: 5px;
+        padding: 0.25rem 0.45rem;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .menu-icon {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(medium down) {
+    .top-bar-title {
+      width: 100%;
+    }
+
+    .top-bar-right {
+      flex: 0 0 100% !important;
+      max-width: 100%;
+    }
+
+    .topbar-responsive-links {
+      width: 100% !important;
+      margin-top: 30px;
+
+      li {
+        margin: 0.5em 0 !important;
+      }
+    }
+
+    flex-wrap: wrap !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  } to {
+    opacity:1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@include breakpoint(small only) {
+  .topbar-responsive-links {
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+    width: 100%;
+
+    @if $topbar-responsive-animation-type == slide-down {
+      animation: slideDown 1s ease-in;
+    } @else if $topbar-responsive-animation-type == fade-in {
+      animation: fadeIn 1s ease-in;
+    } @else {
+      animation: none;
+    }
+  }
+}
+
+
+
+
+/**
+ * *Responsive Hero*
+ */  
+
+$hero-height: 60vh;
+
+.hero {
+  background: url('img/hero.jpg') 50% no-repeat;
+  background-size: cover;
+  height: $hero-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .hero-text {
+    width: 100%;
+    color: $white;
+  }
+}
+
+
+
+/**
+ * *Footer*
+ */
+$site-footer-bg: $secondary-color;
+
+.site-footer {
+  background: $site-footer-bg;
+  color: lighten($site-footer-bg, 40%);
+  padding: 2rem 0 0;
+
+  .site-footer-menu-social a {
+    color: $white;
+  }
+
+  .column-block {
+    margin-bottom: 30px;
+  }
+
+  @include breakpoint(small only) {
+    .cell {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.site-footer-name {
+  color: $white;
+  margin-bottom: 2.5rem;
+  max-width: 200px;
+}
+
+.site-footer-title {
+  color: $white;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.site-footer-block {
+  display: flex;
+  margin-bottom: 1rem;
+
+  .material-symbols-sharp {
+    color: darken($site-footer-bg, 20%);
+    margin-right: 8px;
+    font-size: 1.2rem;
+  }
+
+  p {
+    line-height: 1.125rem;
+  }
+}
+
+.site-footer-bottom {
+  background: darken($site-footer-bg, 20%);
+  padding: 1rem 0;
+
+  p,
+  .menu {
+    margin-bottom: 0;
+  }
+
+  .site-footer-bottom-links {
+    justify-content: flex-end;
+
+    a {
+      color: lighten($site-footer-bg, 40%);
+    }
+
+    @include breakpoint(medium down) {
+      justify-content: center;
+    }
+  }
+
+  @include breakpoint(medium down) {
+    text-align: center;
+  }
+}
+
+
+/**
+ * *Secondary Hero*
+ */
+
+.hero-secondary {
+  background: url('img/bg-1-invert.jpg') center bottom no-repeat;
+  background-size: cover;
+  padding: 10vh 0 20vh;
+  color:$white;
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint(large up) {
+    padding: 15vh 0 25vh;
+  }
+}
+
+
+
+/**
+ * *Use Case*
+ */
+
+section.use-case {
+  padding: $global-padding * 2 0;
+  // background-color: $primary-color;
+  // color: $white;
+
+  img {
+    border-radius: 5px;
+  }
+
+  &.retail {
+    padding: 0 0 $global-padding * 2;
+    
+    img {
+      margin-bottom: 30px;
+    }
+  }
+
+  &.spacer {
+    // padding: $global-padding * 8 0 $global-padding * 2 0;
+    // padding-bottom: $global-padding * 8;
+    background: url('img/bg-3.jpg') center bottom no-repeat;
+    background-size: cover;
+    min-height: 15vh;
+    // color: $white;
+  }
+
+  @include breakpoint(large up) {
+    padding: $global-padding * 5 0;
+
+    &.retail {
+      padding-top: $global-padding * 6;
+    } 
+
+    &.spacer {
+      height: 420px;
+    }
+
+    &.senior,
+    &.events {
+      .cell.large-7 {
+        order: 2;
+      }
+    }
+  }
+}
+
+
+
+/**
+ * *Features*
+ */
+.features-table {
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 50px;
+
+  .material-symbols-sharp {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: $primary-color;
+  }
+
+  .grid-x {
+    justify-content: center;
+  }
+
+  .cell {
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    padding: 1em 1.5em 0
+  }
+
+  &:last-of-type {
+    margin-bottom: 6rem;
+  }
+
+  @include breakpoint(medium up) {
+    padding: 2.5rem 0;
+  }
+}
+
+.features-title {
+  margin-bottom: 1rem;
+}
+
+.features-subheadline.subheader {
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/**
+ * *CTA*
+ */
+
+ .cta {
+  padding: 0 0 $global-padding * 3;
+  color: $white;
+  text-align: center;
+
+  h3 {
+    font-size: 3rem;
+    margin-bottom: 1em;
+  }
+
+  &.cta-cases {
+    background-color: $primary-color;
+  }
+
+  @include breakpoint(large up) {
+    padding: 0 0 $global-padding * 6;
+  }
+ }
+
+
+
+ /**
+  * *CONTACT*
+  */
+
+.contact-form {
+  .grid-y {
+    padding: 10% 5%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  label {
+    margin-bottom: 2rem;
+  }
+
+  input {
+    max-width: 500px;
+  }
+
+  @include breakpoint(large up) {
+    .grid-y {
+      padding: 10% 10%;
+    }
+  }
+}
+
+.contact-image {
+  background: url('img/xondo-contact.jpg') center no-repeat;
+    background-size: cover;
+}
+
+
+
+/**
+ * *Tech Header*
+ */
+
+.tech-header {
+  background-color: $primary-color;
+  padding: 70px 5% 70px;
+  color: $white;
+}
+
+
+
+/**
+ * *Home Video*
+ */
+
+.home-video {
+  margin: $global-margin * 3 auto $global-margin * 1;
+}
+
+
+
+/**
+ * *Home Intro*
+ */
+
+.home-intro {
+  margin: $global-margin * 3 auto $global-margin * 4;
+
+  .grid-x {
+    align-items: center;
+  }
+  img {
+    border-radius: 5px;
+  }
+
+  @include breakpoint(large up) {
+    .cell.medium-10.large-4:nth-child(3) {
+      order: 4;
+    }
+  }
+}
