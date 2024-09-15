@@ -311,13 +311,13 @@
     },
     "\/assets\/img\/bg-3.jpg" : {
       "ft" : 16384,
-      "iS" : 56647,
+      "iS" : 32840,
       "jF" : 0,
       "oA" : 0,
       "oAP" : "\/assets\/img\/bg-3.jpg",
       "oF" : 0,
       "oIPL" : 0,
-      "opt" : 1,
+      "opt" : 0,
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
@@ -389,13 +389,13 @@
     },
     "\/assets\/img\/hero.jpg" : {
       "ft" : 16384,
-      "iS" : 105531,
+      "iS" : 86709,
       "jF" : 0,
       "oA" : 0,
       "oAP" : "\/assets\/img\/hero.jpg",
       "oF" : 0,
       "oIPL" : 0,
-      "opt" : 1,
+      "opt" : 0,
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
