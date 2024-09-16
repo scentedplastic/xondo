@@ -399,7 +399,7 @@ $site-footer-bg: $secondary-color;
 
 .site-footer-block {
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 
   .material-symbols-sharp {
     color: darken($site-footer-bg, 20%);
@@ -408,7 +408,7 @@ $site-footer-bg: $secondary-color;
   }
 
   p {
-    line-height: 1.125rem;
+    line-height: 1.25rem;
   }
 }
 
@@ -657,3 +657,30 @@ section.use-case {
     }
   }
 }
+
+
+
+/**
+ * *Addresses*
+ */
+
+ .contact-addresses {
+  text-align: center;
+  padding: $global-margin * 4 0 $global-margin * 5;
+  background-color: $light-gray;
+
+  span {
+    color: $primary-color;
+  }
+
+  h3 {
+    margin-bottom: 1em;
+  }
+
+  .cell.medium-4 {
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    padding: 2em 1.5em 1.5em;
+    background-color: rgba(255,255,255,0.5);
+  }
+ }
